@@ -6,7 +6,7 @@
 /*   By: mle-flem <mle-flem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 12:04:22 by mle-flem          #+#    #+#             */
-/*   Updated: 2024/11/25 13:04:09 by mle-flem         ###   ########.fr       */
+/*   Updated: 2024/11/25 19:22:07 by mle-flem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,4 +43,9 @@ void	mcheck(void *ptr, size_t target_size)
 	else
 		printf(" %s[%d.mKO]", CLR_KO, g_test_id++);
 	free(ptr2);
+}
+
+void	title(char *title)
+{
+	printf("%s%s%s", CLR_TITLE, title, CLR_RESET);
 }

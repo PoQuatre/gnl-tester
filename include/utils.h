@@ -6,7 +6,7 @@
 /*   By: mle-flem <mle-flem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 13:04:06 by mle-flem          #+#    #+#             */
-/*   Updated: 2024/11/25 13:04:07 by mle-flem         ###   ########.fr       */
+/*   Updated: 2024/11/25 19:22:35 by mle-flem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <stddef.h>
 
 # define CLR_RESET "\x1b[0m"
+# define CLR_TITLE "\x1b[0;2;97m"
 # define CLR_SEGV "\x1b[0;1;91;7m"
 # define CLR_OK "\x1b[0;1;92m"
 # define CLR_KO "\x1b[0;1;91m"
@@ -24,5 +25,6 @@
 void	handle_segv(int sig);
 void	check(bool ok);
 void	mcheck(void *ptr, size_t target_size);
+void	title(char *title);
 
 #endif
