@@ -6,11 +6,11 @@
 #    By: mle-flem <mle-flem@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/25 08:36:52 by mle-flem          #+#    #+#              #
-#    Updated: 2024/11/25 13:06:44 by mle-flem         ###   ########.fr        #
+#    Updated: 2024/11/25 15:12:42 by mle-flem         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-GNL_PATH = gnl
+GNL_PATH = ..
 
 SRC = src/utils.c \
 
