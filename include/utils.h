@@ -6,7 +6,7 @@
 /*   By: mle-flem <mle-flem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 13:04:06 by mle-flem          #+#    #+#             */
-/*   Updated: 2024/11/25 19:22:35 by mle-flem         ###   ########.fr       */
+/*   Updated: 2024/11/25 19:35:41 by mle-flem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@
 # define CLR_SEGV "\x1b[0;1;91;7m"
 # define CLR_OK "\x1b[0;1;92m"
 # define CLR_KO "\x1b[0;1;91m"
+
+# define TEST(title_str, code) { title(title_str); {code}; printf("\n"); }
 
 void	handle_segv(int sig);
 void	check(bool ok);

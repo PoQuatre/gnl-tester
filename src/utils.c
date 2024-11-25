@@ -6,7 +6,7 @@
 /*   By: mle-flem <mle-flem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 12:04:22 by mle-flem          #+#    #+#             */
-/*   Updated: 2024/11/25 19:22:07 by mle-flem         ###   ########.fr       */
+/*   Updated: 2024/11/25 19:33:17 by mle-flem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,5 +47,6 @@ void	mcheck(void *ptr, size_t target_size)
 
 void	title(char *title)
 {
+	g_test_id = 1;
 	printf("%s%s%s", CLR_TITLE, title, CLR_RESET);
 }
