@@ -6,13 +6,13 @@
 #    By: mle-flem <mle-flem@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/25 08:36:52 by mle-flem          #+#    #+#              #
-#    Updated: 2024/11/25 13:03:31 by mle-flem         ###   ########.fr        #
+#    Updated: 2024/11/25 13:06:44 by mle-flem         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 GNL_PATH = gnl
 
-SRC = \
+SRC = src/utils.c \
 
 INCLUDE = include/ \
 		  $(GNL_PATH)/ \
