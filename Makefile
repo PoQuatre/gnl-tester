@@ -54,14 +54,12 @@ all: mandatory bonus
 .PHONY: mandatory
 mandatory: $(OBJ) $(MANDATORY_OBJ)
 	$(CC) $^
-	$(VALGRIND) ./a.out || true
-	$(RM) ./a.out
+	$(VALGRIND) ./a.out; $(RM) ./a.out
 
 .PHONY: bonus
 bonus: $(OBJ) $(BONUS_OBJ)
 	$(CC) $^
-	$(VALGRIND) ./a.out || true
-	$(RM) ./a.out
+	$(VALGRIND) ./a.out; $(RM) ./a.out
 
 %.o: %.c
 	$(CC) $(CFLAGS) -o $@ -c $<
