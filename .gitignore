@@ -1,0 +1,6 @@
+*.o
+*.d
+/gnl
+/gnl/
+compile_commands.json
+.cache/
