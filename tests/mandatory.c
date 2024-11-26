@@ -6,7 +6,7 @@
 /*   By: mle-flem <mle-flem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 13:05:00 by mle-flem          #+#    #+#             */
-/*   Updated: 2024/11/26 15:10:01 by mle-flem         ###   ########.fr       */
+/*   Updated: 2024/11/26 15:11:10 by mle-flem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,17 @@ int	main(void)
 		fd = open("testdata/nl", O_RDONLY);
 		/* 1 */ gnl_check(fd, "\n");
 		/* 2 */ gnl_check(fd, NULL);
+		close(fd);
+	});
+
+	TEST("nl_x5:", {
+		fd = open("testdata/nl_x5", O_RDONLY);
+		/* 1 */ gnl_check(fd, "\n");
+		/* 2 */ gnl_check(fd, "\n");
+		/* 3 */ gnl_check(fd, "\n");
+		/* 4 */ gnl_check(fd, "\n");
+		/* 5 */ gnl_check(fd, "\n");
+		/* 6 */ gnl_check(fd, NULL);
 		close(fd);
 	});
 }
