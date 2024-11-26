@@ -6,7 +6,7 @@
 /*   By: mle-flem <mle-flem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 12:04:22 by mle-flem          #+#    #+#             */
-/*   Updated: 2024/11/26 16:20:35 by mle-flem         ###   ########.fr       */
+/*   Updated: 2024/11/26 20:02:08 by mle-flem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,16 +23,16 @@ static int g_test_id = 1;
 void	handle_segv(int sig)
 {
 	(void) sig;
-	printf(" %s[%d.SEGV]", CLR_SEGV, g_test_id++);
+	printf(" %s[%d.SEGV]%s", CLR_SEGV, g_test_id++, CLR_RESET);
 	exit(1);
 }
 
 void	check(bool ok)
 {
 	if (ok)
-		printf(" %s[%d.OK]", CLR_OK, g_test_id++);
+		printf(" %s[%d.OK]%s", CLR_OK, g_test_id++, CLR_RESET);
 	else
-		printf(" %s[%d.KO]", CLR_KO, g_test_id++);
+		printf(" %s[%d.KO]%s", CLR_KO, g_test_id++, CLR_RESET);
 }
 
 void	gnl_check(int fd, char *expected)
@@ -46,9 +46,9 @@ void	gnl_check(int fd, char *expected)
 		check(res && !strcmp(res, expected));
 		ptr = malloc(strlen(expected) + 1);
 		if (res != NULL && malloc_usable_size(res) == malloc_usable_size(ptr))
-			printf(" %s[%d.mOK]", CLR_OK, g_test_id - 1);
+			printf(" %s[%d.mOK]%s", CLR_OK, g_test_id - 1, CLR_RESET);
 		else
-			printf(" %s[%d.mKO]", CLR_KO, g_test_id - 1);
+			printf(" %s[%d.mKO]%s", CLR_KO, g_test_id - 1, CLR_RESET);
 		free(ptr);
 	}
 	else
@@ -62,9 +62,9 @@ void	mcheck(void *ptr, size_t target_size)
 
 	ptr2 = malloc(target_size);
 	if (ptr != NULL && malloc_usable_size(ptr) == malloc_usable_size(ptr2))
-		printf(" %s[%d.mOK]", CLR_OK, g_test_id++);
+		printf(" %s[%d.mOK]%s", CLR_OK, g_test_id++, CLR_RESET);
 	else
-		printf(" %s[%d.mKO]", CLR_KO, g_test_id++);
+		printf(" %s[%d.mKO]%s", CLR_KO, g_test_id++, CLR_RESET);
 	free(ptr2);
 }
 

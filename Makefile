@@ -6,11 +6,11 @@
 #    By: mle-flem <mle-flem@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/25 08:36:52 by mle-flem          #+#    #+#              #
-#    Updated: 2024/11/25 15:12:42 by mle-flem         ###   ########.fr        #
+#    Updated: 2024/11/26 20:11:24 by mle-flem         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-GNL_PATH = ..
+GNL_PATH = gnl
 
 SRC = src/utils.c \
 
@@ -41,7 +41,7 @@ COMPDB := $(COMPDB:%.c=%.compdb.json)
 CC = gcc
 RM = rm -f
 
-CFLAGS += -Wall -Wextra -Werror
+CFLAGS += -Wall -Wextra -Werror -g
 CFLAGS += $(INCLUDE:%=-I%)
 
 ifneq ($(shell which valgrind),)
@@ -52,14 +52,59 @@ endif
 all: mandatory bonus
 
 .PHONY: mandatory
-mandatory: $(OBJ) $(MANDATORY_OBJ)
-	$(CC) $^
-	$(VALGRIND) ./a.out; $(RM) ./a.out
+mandatory: .mandatory-msg mandatory-1 mandatory-42 mandatory-10M
 
+.PHONY: .mandatory-msg
+.mandatory-msg:
+	@printf "\033[0;1;93m[ MANDATORY ]\033[0m\n"
+
+.PHONY: mandatory-1
+mandatory-1: CFLAGS += -DBUFFER_SIZE=1
+mandatory-1:
+	@printf "\n\033[0;1;94mBUFFER_SIZE=1\033[0m\n"
+	@$(CC) $(CFLAGS) $(SRC) $(MANDATORY_SRC)
+	@$(VALGRIND) ./a.out; $(RM) ./a.out
+
+.PHONY: mandatory-42
+mandatory-42: CFLAGS += -DBUFFER_SIZE=42
+mandatory-42:
+	@printf "\n\033[0;1;94mBUFFER_SIZE=42\033[0m\n"
+	@$(CC) $(CFLAGS) $(SRC) $(MANDATORY_SRC)
+	@$(VALGRIND) ./a.out; $(RM) ./a.out
+
+.PHONY: mandatory-10M
+mandatory-10M: CFLAGS += -DBUFFER_SIZE=10000000
+mandatory-10M:
+	@printf "\n\033[0;1;94mBUFFER_SIZE=10000000\033[0m\n"
+	@$(CC) $(CFLAGS) $(SRC) $(MANDATORY_SRC)
+	@$(VALGRIND) ./a.out; $(RM) ./a.out
 .PHONY: bonus
-bonus: $(OBJ) $(BONUS_OBJ)
-	$(CC) $^
-	$(VALGRIND) ./a.out; $(RM) ./a.out
+bonus: .bonus-msg bonus-1 bonus-42 bonus-10M
+
+.PHONY: .bonus-msg
+.bonus-msg:
+	@printf "\033[0;1;93m[ BONUS ]\033[0m\n"
+
+.PHONY: bonus-1
+bonus-1: CFLAGS += -DBUFFER_SIZE=1
+bonus-1:
+	@printf "\n\033[0;1;94mBUFFER_SIZE=1\033[0m\n"
+	@$(CC) $(CFLAGS) $(SRC) $(BONUS_SRC)
+	@$(VALGRIND) ./a.out; $(RM) ./a.out
+
+.PHONY: bonus-42
+bonus-42: CFLAGS += -DBUFFER_SIZE=42
+bonus-42:
+	@printf "\n\033[0;1;94mBUFFER_SIZE=42\033[0m\n"
+	@$(CC) $(CFLAGS) $(SRC) $(BONUS_SRC)
+	@$(VALGRIND) ./a.out; $(RM) ./a.out
+
+.PHONY: bonus-10M
+bonus-10M: CFLAGS += -DBUFFER_SIZE=10000000
+bonus-10M:
+	@printf "\n\033[0;1;94mBUFFER_SIZE=10000000\033[0m\n"
+	@$(CC) $(CFLAGS) $(SRC) $(BONUS_SRC)
+	@$(VALGRIND) ./a.out; $(RM) ./a.out
 
 %.o: %.c
 	$(CC) $(CFLAGS) -o $@ -c $<
