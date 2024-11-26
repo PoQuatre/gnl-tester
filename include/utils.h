@@ -6,7 +6,7 @@
 /*   By: mle-flem <mle-flem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 13:04:06 by mle-flem          #+#    #+#             */
-/*   Updated: 2024/11/25 19:35:41 by mle-flem         ###   ########.fr       */
+/*   Updated: 2024/11/26 14:57:28 by mle-flem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@
 
 void	handle_segv(int sig);
 void	check(bool ok);
+void	gnl_check(int fd, char *expected);
 void	mcheck(void *ptr, size_t target_size);
 void	title(char *title);
 

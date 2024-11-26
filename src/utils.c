@@ -6,7 +6,7 @@
 /*   By: mle-flem <mle-flem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 12:04:22 by mle-flem          #+#    #+#             */
-/*   Updated: 2024/11/25 19:33:17 by mle-flem         ###   ########.fr       */
+/*   Updated: 2024/11/26 14:59:30 by mle-flem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 #include <malloc.h>
 
 #include "utils.h"
+
+#include "get_next_line.h"
 
 static int g_test_id = 1;
 
@@ -31,6 +33,18 @@ void	check(bool ok)
 		printf(" %s[%d.OK]", CLR_OK, g_test_id++);
 	else
 		printf(" %s[%d.KO]", CLR_KO, g_test_id++);
+}
+
+void	gnl_check(int fd, char *expected)
+{
+	char *res;
+
+	res = get_next_line(fd);
+	if (expected)
+		check(res && !strcmp(res, expected));
+	else
+		check(!res);
+	free(res);
 }
 
 void	mcheck(void *ptr, size_t target_size)
