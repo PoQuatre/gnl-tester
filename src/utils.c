@@ -6,7 +6,7 @@
 /*   By: mle-flem <mle-flem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 12:04:22 by mle-flem          #+#    #+#             */
-/*   Updated: 2024/11/26 14:59:30 by mle-flem         ###   ########.fr       */
+/*   Updated: 2024/11/26 16:20:35 by mle-flem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,20 @@ void	check(bool ok)
 
 void	gnl_check(int fd, char *expected)
 {
-	char *res;
+	char	*res;
+	void	*ptr;
 
 	res = get_next_line(fd);
 	if (expected)
+	{
 		check(res && !strcmp(res, expected));
+		ptr = malloc(strlen(expected) + 1);
+		if (res != NULL && malloc_usable_size(res) == malloc_usable_size(ptr))
+			printf(" %s[%d.mOK]", CLR_OK, g_test_id - 1);
+		else
+			printf(" %s[%d.mKO]", CLR_KO, g_test_id - 1);
+		free(ptr);
+	}
 	else
 		check(!res);
 	free(res);
