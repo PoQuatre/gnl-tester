@@ -6,7 +6,7 @@
 /*   By: mle-flem <mle-flem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 13:04:06 by mle-flem          #+#    #+#             */
-/*   Updated: 2024/11/26 15:24:14 by mle-flem         ###   ########.fr       */
+/*   Updated: 2024/11/26 16:12:57 by mle-flem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,23 @@
 	title(title_str ":"); \
 	int fd = open("testdata/" title_str, O_RDONLY); \
 	if (fd < 0) \
-		printf("%s [CANNOT OPEN %s]%s", CLR_KO, "testdata/" title_str, CLR_RESET); \
+		printf("%s [CANNOT OPEN %s]%s", CLR_SEGV, "testdata/" title_str, CLR_RESET); \
 	else \
 	{ \
 		{code}; \
 		close(fd); \
+		printf("\n"); \
+		title(title_str " stdin:"); \
+		int fd2 = open("testdata/" title_str, O_RDONLY); \
+		if (fd2 < 0) \
+			printf("%s [CANNOT OPEN %s]%s", CLR_SEGV, "testdata/" title_str, CLR_RESET); \
+		else if (dup2(fd2, 0) < 0) \
+			printf("%s [CANNOT REDIRECT TO STDIN]%s", CLR_SEGV, CLR_RESET); \
+		close(fd2); \
+		fd = 0; \
+		{code}; \
 	} \
-	printf(" \n");\
+	printf("\n"); \
 }
 
 void	handle_segv(int sig);
