@@ -53,4 +53,9 @@ int	main(void)
 		/* 1 */ gnl_check(fd, "01234567890123456789012345678901234567890");
 		/* 2 */ gnl_check(fd, NULL);
 	});
+
+	TESTF("41_with_nl", {
+		/* 1 */ gnl_check(fd, "01234567890123456789012345678901234567890\n");
+		/* 2 */ gnl_check(fd, NULL);
+	});
 }
