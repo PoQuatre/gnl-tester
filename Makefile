@@ -6,11 +6,11 @@
 #    By: mle-flem <mle-flem@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/25 08:36:52 by mle-flem          #+#    #+#              #
-#    Updated: 2024/11/27 19:09:10 by mle-flem         ###   ########.fr        #
+#    Updated: 2024/11/27 19:11:33 by mle-flem         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-GNL_PATH = gnl
+GNL_PATH = ..
 
 SRC = src/utils.c \
 
@@ -52,7 +52,7 @@ endif
 all: mandatory .separator bonus
 
 .PHONY: mandatory
-mandatory: .mandatory-msg mandatory-1 mandatory-42 mandatory-10M
+mandatory: .mandatory-msg mandatory-1 mandatory-42 mandatory-10M mandatory-default
 
 .PHONY: .mandatory-msg
 .mandatory-msg:
@@ -79,12 +79,18 @@ mandatory-10M:
 	@$(CC) $(CFLAGS) $(SRC) $(MANDATORY_SRC)
 	@$(VALGRIND) ./a.out; $(RM) ./a.out
 
+.PHONY: mandatory-default
+mandatory-default:
+	@printf "\n\033[0;1;94mBUFFER_SIZE=???\033[0m\n"
+	@$(CC) $(CFLAGS) $(SRC) $(MANDATORY_SRC)
+	@$(VALGRIND) ./a.out; $(RM) ./a.out
+
 .PHONY: .separator
 .separator:
 	@printf "\n"
 
 .PHONY: bonus
-bonus: .bonus-msg bonus-1 bonus-42 bonus-10M
+bonus: .bonus-msg bonus-1 bonus-42 bonus-10M bonus-default
 
 .PHONY: .bonus-msg
 .bonus-msg:
@@ -108,6 +114,12 @@ bonus-42:
 bonus-10M: CFLAGS += -DBUFFER_SIZE=10000000
 bonus-10M:
 	@printf "\n\033[0;1;94mBUFFER_SIZE=10000000\033[0m\n"
+	@$(CC) $(CFLAGS) $(SRC) $(BONUS_SRC)
+	@$(VALGRIND) ./a.out; $(RM) ./a.out
+
+.PHONY: bonus-default
+bonus-default:
+	@printf "\n\033[0;1;94mBUFFER_SIZE=???\033[0m\n"
 	@$(CC) $(CFLAGS) $(SRC) $(BONUS_SRC)
 	@$(VALGRIND) ./a.out; $(RM) ./a.out
 
