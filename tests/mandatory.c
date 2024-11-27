@@ -6,7 +6,7 @@
 /*   By: mle-flem <mle-flem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 13:05:00 by mle-flem          #+#    #+#             */
-/*   Updated: 2024/11/26 15:47:15 by mle-flem         ###   ########.fr       */
+/*   Updated: 2024/11/27 19:10:01 by mle-flem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,10 @@
 #include <unistd.h>
 
 #include "utils.h"
+
+#ifndef BUFFER_SIZE
+# define BUFFER_SIZE 4096
+#endif
 
 int	main(void)
 {
@@ -55,8 +59,9 @@ int	main(void)
 	});
 
 	TESTF("41_with_nl", {
-		/* 1 */ gnl_check(fd, "01234567890123456789012345678901234567890\n");
-		/* 2 */ gnl_check(fd, NULL);
+		/* 1 */ gnl_check(fd, "0123456789012345678901234567890123456789\n");
+		/* 2 */ gnl_check(fd, "0");
+		/* 3 */ gnl_check(fd, NULL);
 	});
 
 	TESTF("42_no_nl", {
@@ -65,8 +70,16 @@ int	main(void)
 	});
 
 	TESTF("42_with_nl", {
-		/* 1 */ gnl_check(fd, "012345678901234567890123456789012345678901\n");
-		/* 2 */ gnl_check(fd, NULL);
+		/* 1 */ gnl_check(fd, "01234567890123456789012345678901234567890\n");
+		if (BUFFER_SIZE == 42)
+		{
+			char c = 0;
+			read(fd, &c, 1);
+			/* 2 */ check(c == '1');
+		}
+		else
+			/* 2 */ gnl_check(fd, "1");
+		/* 3 */ gnl_check(fd, NULL);
 	});
 
 	TESTF("43_no_nl", {
@@ -75,8 +88,9 @@ int	main(void)
 	});
 
 	TESTF("43_with_nl", {
-		/* 1 */ gnl_check(fd, "0123456789012345678901234567890123456789012\n");
-		/* 2 */ gnl_check(fd, NULL);
+		/* 1 */ gnl_check(fd, "012345678901234567890123456789012345678901\n");
+		/* 2 */ gnl_check(fd, "2");
+		/* 3 */ gnl_check(fd, NULL);
 	});
 
 	TESTF("mul_no_nl", {
