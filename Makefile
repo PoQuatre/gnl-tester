@@ -6,7 +6,7 @@
 #    By: mle-flem <mle-flem@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/25 08:36:52 by mle-flem          #+#    #+#              #
-#    Updated: 2024/11/27 19:11:33 by mle-flem         ###   ########.fr        #
+#    Updated: 2024/11/27 19:41:40 by mle-flem         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,11 +19,9 @@ INCLUDE = include/ \
 
 MANDATORY_SRC = $(GNL_PATH)/get_next_line.c \
 				$(GNL_PATH)/get_next_line_utils.c \
-				tests/mandatory.c \
 
 BONUS_SRC = $(GNL_PATH)/get_next_line_bonus.c \
 			$(GNL_PATH)/get_next_line_utils_bonus.c \
-			tests/bonus.c \
 
 OBJ = $(SRC:%.c=%.o)
 MANDATORY_OBJ = $(MANDATORY_SRC:%.c=%.o)
@@ -62,27 +60,27 @@ mandatory: .mandatory-msg mandatory-1 mandatory-42 mandatory-10M mandatory-defau
 mandatory-1: CFLAGS += -DBUFFER_SIZE=1
 mandatory-1:
 	@printf "\n\033[0;1;94mBUFFER_SIZE=1\033[0m\n"
-	@$(CC) $(CFLAGS) $(SRC) $(MANDATORY_SRC)
+	@$(CC) $(CFLAGS) tests/mandatory.c $(SRC) $(MANDATORY_SRC)
 	@$(VALGRIND) ./a.out; $(RM) ./a.out
 
 .PHONY: mandatory-42
 mandatory-42: CFLAGS += -DBUFFER_SIZE=42
 mandatory-42:
 	@printf "\n\033[0;1;94mBUFFER_SIZE=42\033[0m\n"
-	@$(CC) $(CFLAGS) $(SRC) $(MANDATORY_SRC)
+	@$(CC) $(CFLAGS) tests/mandatory.c $(SRC) $(MANDATORY_SRC)
 	@$(VALGRIND) ./a.out; $(RM) ./a.out
 
 .PHONY: mandatory-10M
 mandatory-10M: CFLAGS += -DBUFFER_SIZE=10000000
 mandatory-10M:
 	@printf "\n\033[0;1;94mBUFFER_SIZE=10000000\033[0m\n"
-	@$(CC) $(CFLAGS) $(SRC) $(MANDATORY_SRC)
+	@$(CC) $(CFLAGS) tests/mandatory.c $(SRC) $(MANDATORY_SRC)
 	@$(VALGRIND) ./a.out; $(RM) ./a.out
 
 .PHONY: mandatory-default
 mandatory-default:
 	@printf "\n\033[0;1;94mBUFFER_SIZE=???\033[0m\n"
-	@$(CC) $(CFLAGS) $(SRC) $(MANDATORY_SRC)
+	@$(CC) $(CFLAGS) tests/mandatory.c $(SRC) $(MANDATORY_SRC)
 	@$(VALGRIND) ./a.out; $(RM) ./a.out
 
 .PHONY: .separator
@@ -100,27 +98,35 @@ bonus: .bonus-msg bonus-1 bonus-42 bonus-10M bonus-default
 bonus-1: CFLAGS += -DBUFFER_SIZE=1
 bonus-1:
 	@printf "\n\033[0;1;94mBUFFER_SIZE=1\033[0m\n"
-	@$(CC) $(CFLAGS) $(SRC) $(BONUS_SRC)
+	@$(CC) $(CFLAGS) tests/mandatory.c $(SRC) $(BONUS_SRC)
+	@$(VALGRIND) ./a.out; $(RM) ./a.out
+	@$(CC) $(CFLAGS) tests/bonus.c $(SRC) $(BONUS_SRC)
 	@$(VALGRIND) ./a.out; $(RM) ./a.out
 
 .PHONY: bonus-42
 bonus-42: CFLAGS += -DBUFFER_SIZE=42
 bonus-42:
 	@printf "\n\033[0;1;94mBUFFER_SIZE=42\033[0m\n"
-	@$(CC) $(CFLAGS) $(SRC) $(BONUS_SRC)
+	@$(CC) $(CFLAGS) tests/mandatory.c $(SRC) $(BONUS_SRC)
+	@$(VALGRIND) ./a.out; $(RM) ./a.out
+	@$(CC) $(CFLAGS) tests/bonus.c $(SRC) $(BONUS_SRC)
 	@$(VALGRIND) ./a.out; $(RM) ./a.out
 
 .PHONY: bonus-10M
 bonus-10M: CFLAGS += -DBUFFER_SIZE=10000000
 bonus-10M:
 	@printf "\n\033[0;1;94mBUFFER_SIZE=10000000\033[0m\n"
-	@$(CC) $(CFLAGS) $(SRC) $(BONUS_SRC)
+	@$(CC) $(CFLAGS) tests/mandatory.c $(SRC) $(BONUS_SRC)
+	@$(VALGRIND) ./a.out; $(RM) ./a.out
+	@$(CC) $(CFLAGS) tests/bonus.c $(SRC) $(BONUS_SRC)
 	@$(VALGRIND) ./a.out; $(RM) ./a.out
 
 .PHONY: bonus-default
 bonus-default:
 	@printf "\n\033[0;1;94mBUFFER_SIZE=???\033[0m\n"
-	@$(CC) $(CFLAGS) $(SRC) $(BONUS_SRC)
+	@$(CC) $(CFLAGS) tests/mandatory.c $(SRC) $(BONUS_SRC)
+	@$(VALGRIND) ./a.out; $(RM) ./a.out
+	@$(CC) $(CFLAGS) tests/bonus.c $(SRC) $(BONUS_SRC)
 	@$(VALGRIND) ./a.out; $(RM) ./a.out
 
 %.o: %.c
