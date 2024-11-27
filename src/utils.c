@@ -6,7 +6,7 @@
 /*   By: mle-flem <mle-flem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 12:04:22 by mle-flem          #+#    #+#             */
-/*   Updated: 2024/11/26 20:02:08 by mle-flem         ###   ########.fr       */
+/*   Updated: 2024/11/27 21:07:56 by mle-flem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ void	gnl_check(int fd, char *expected)
 	if (expected)
 	{
 		check(res && !strcmp(res, expected));
+		fflush(stdout);
 		ptr = malloc(strlen(expected) + 1);
 		if (res != NULL && malloc_usable_size(res) == malloc_usable_size(ptr))
 			printf(" %s[%d.mOK]%s", CLR_OK, g_test_id - 1, CLR_RESET);
@@ -54,6 +55,7 @@ void	gnl_check(int fd, char *expected)
 	else
 		check(!res);
 	free(res);
+	fflush(stdout);
 }
 
 void	mcheck(void *ptr, size_t target_size)
